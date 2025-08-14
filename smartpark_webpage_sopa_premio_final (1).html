@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartPark System - Proyecto Escolar</title>
+  <style>
+    /* ====== Estilos base de la página ====== */
+    body {
+      text-align: justify;
+      font-family: Arial, sans-serif;
+      background: #e9f5ff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #007acc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { margin: 0; }
+    section {
+      text-align: justify;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .circuito {
+      background: white;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .btn-formulario {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    footer {
+      background-color: #003f66;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+    .boton-sopa {
+      display: inline-block;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #0077b6;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+    .boton-sopa:active { transform: translateY(1px); }
+
+    /* ====== Estilos del popup de Sopa de Letras ====== */
+    #sopaPopup { 
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+      background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000; 
+      padding: 10px;
+    }
+    #sopaContent { 
+      background:#fff; padding:20px; border-radius:12px; width:100%; max-width:360px; 
+      position:relative; text-align:center;
+    }
+    .grid { 
+      display:grid; grid-template-columns: repeat(8, 34px); grid-gap:3px; justify-content:center; 
+      margin:10px auto; user-select:none; 
+    }
+    .letra { 
+      width:34px; height:34px; display:flex; justify-content:center; align-items:center; 
+      border:1px solid #333; font-weight:bold; font-size:14px; cursor:pointer; transition: all 0.2s; 
+    }
+    .marcada { color:#fff; }
+    #palabras { margin-top:10px; font-size:14px; }
+    #palabras span { margin:4px; font-weight:bold; color:#0077b6; display:inline-block; }
+    .tachada { text-decoration: line-through; }
+    #temporizador { margin-top:10px; font-size:16px; font-weight:bold; }
+    #cerrarBtn { margin-top:15px; padding:8px 14px; cursor:pointer; background:#0077b6; color:#fff; border:none; border-radius:8px; }
+    #reintentarDiv { display:none; margin-top:10px; }
+    #reintentarDiv button { margin:5px; padding:6px 12px; cursor:pointer; border:none; border-radius:6px; }
+    #mensajeFinal { display:none; margin-top:10px; background:#d4edda; padding:10px; border-radius:8px; color:#155724; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SmartPark System</h1>
+    <p>Proyecto de Estacionamiento Automatizado - Colegio San Martín de Porres, La Serena - Coquimbo</p>
+  </header>
+
+  <section>
+    <h2>¿Cuál es nuestro objetivo?</h2>
+    <p>Nuestro objetivo con SmartPark System es demostrar, a través de una maqueta funcional, cómo un sistema de estacionamiento automatizado puede optimizar el control de acceso, mejorar la organización de espacios y facilitar la experiencia del usuario.</p>
+
+    <p>Queremos que este proyecto sea una representación clara de cómo la electrónica, la programación y la creatividad pueden trabajar juntas para resolver problemas cotidianos.</p>
+
+    <h2>¿Cómo funciona?</h2>
+    <p>La maqueta utiliza sensores infrarrojos para detectar la entrada y salida de vehículos. Cuando un auto se aproxima, el sistema evalúa si hay espacios disponibles:</p>
+    <ul>
+      <li>Si los hay, una barrera controlada por un servomotor se levanta y la pantalla LCD actualiza la cantidad de lugares libres.</li>
+      <li>Si no hay disponibilidad, la barrera permanece cerrada y las luces LED RGB indican que el estacionamiento está lleno.</li>
+    </ul>
+    <p>Además, al salir, el usuario recibe un mensaje en la pantalla LCD, creando una experiencia más interactiva.</p>
+
+    <h2>Características principales:</h2>
+    <ul>
+      <li>Conteo automático de vehículos.</li>
+      <li>Señalización visual clara mediante luces LED RGB.</li>
+      <li>Mensajes en pantalla LCD para informar y despedir al usuario.</li>
+      <li>Sistema modular, fácil de ampliar y modificar.</li>
+    </ul>
+
+    
+    <h2>¿Te gustaría participar por un premio?</h2>
+    <p>Completa esta sopa de letras para demostrar tus habilidades y podrás participar por un premio.</p>
+    <button class="boton-sopa abrirSopaBtn">Jugar Sopa de Letras</button>
+    </div>
+
+    
+
+    
+
+    <h2>¿Te pareció interesante este proyecto?</h2>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfwpT8DlCcwaIwi6xSpYyWWu7WxnYqhaXCn7ayWUYgzhhLzaA/viewform" class="btn-formulario" target="_blank">Responde aquí</a>
+
+    <h2>¿Dónde puedo saber más?</h2>
+    <ul>
+      <li><a href="https://www.arduino.cc/" target="_blank">Sitio oficial de Arduino</a></li>
+      <li><a href="https://proyectatumente.com/" target="_blank">Proyecta tu mente (canal educativo)</a></li>
+      <li><a href="https://es.wikipedia.org/wiki/Arduino" target="_blank">Arduino en Wikipedia</a></li>
+    </ul>
+  </section>
+
+  <!-- ====== Popup de Sopa de Letras (reutilizable por los tres botones) ====== -->
+  <div id="sopaPopup">
+    <div id="sopaContent">
+      <h2>Sopa de Letras</h2>
+      <div id="temporizador">Tiempo: 00:40</div>
+      <div class="grid" id="gridSopa"></div>
+      <div id="palabras"></div>
+      <div id="mensajeFinal"></div>
+      <div id="reintentarDiv">
+        <p>¿Desea volver a intentarlo?</p>
+        <button id="btnReintentar">Reintentar</button>
+        <button id="btnVolverInicio">Volver al inicio</button>
+      </div>
+      <button id="cerrarBtn">Cerrar</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Hecho por estudiantes del Colegio San Martín de Porres: Abigail Centurión, Scarlett Rojas y Francisco Valenzuela.</p>
+  </footer>
+
+  <script>
+    // ====== Lógica de la Sopa de Letras (adaptada para múltiples botones) ======
+    let palabras = ['PANTALLA','SENSOR','LUCES','BARRERA','AUTO'];
+    const gridEl = document.getElementById('gridSopa');
+    const palabrasEl = document.getElementById('palabras');
+    const mensajeFinalEl = document.getElementById('mensajeFinal');
+    let seleccionando = false;
+    let seleccion = [];
+    let tiempoRestante = 40;
+    let timerInterval;
+    let sonidoPalabra = new Audio('https://www.soundjay.com/button/beep-07.wav');
+    let colores = ['#f94144','#f3722c','#f9c74f','#90be6d','#577590','#43aa8b','#ff6f61','#6a4c93'];
+
+    // Conectar todos los botones "Jugar Sopa de Letras"
+    document.querySelectorAll('.abrirSopaBtn').forEach(btn => {
+      btn.addEventListener('click', abrirSopa);
+    });
+    document.getElementById('cerrarBtn').addEventListener('click', cerrarSopa);
+    document.getElementById('btnReintentar').addEventListener('click', ()=>{cerrarSopa(); abrirSopa();});
+    document.getElementById('btnVolverInicio').addEventListener('click', cerrarSopa);
+
+    function inicializarSopa(){
+      generarGrid();
+      mostrarPalabras();
+      startTemporizador();
+      document.getElementById('reintentarDiv').style.display='none';
+      mensajeFinalEl.style.display='none';
+      seleccion = [];
+    }
+
+    function abrirSopa(){
+      document.getElementById('sopaPopup').style.display='flex';
+      inicializarSopa();
+    }
+
+    function cerrarSopa(){
+      document.getElementById('sopaPopup').style.display='none';
+      clearInterval(timerInterval);
+    }
+
+    function startTemporizador(){
+      clearInterval(timerInterval);
+      tiempoRestante = 40;
+      document.getElementById('temporizador').innerText = `Tiempo: 00:40`;
+      timerInterval = setInterval(()=>{
+        tiempoRestante--;
+        let min = String(Math.floor(tiempoRestante/60)).padStart(2,'0');
+        let sec = String(tiempoRestante%60).padStart(2,'0');
+        document.getElementById('temporizador').innerText = `Tiempo: ${min}:${sec}`;
+        if(tiempoRestante<=0){
+          clearInterval(timerInterval);
+          document.getElementById('reintentarDiv').style.display='block';
+        }
+      },1000);
+    }
+
+    function mostrarPalabras(){
+      palabrasEl.innerHTML = 'Palabras: ' + palabras.map(p => `<span>${p}</span>`).join(' ');
+    }
+
+    function generarGrid(){
+      gridEl.innerHTML='';
+      const filas = 8;
+      const cols = 8;
+      let matriz = Array(filas).fill(null).map(()=>Array(cols).fill(''));
+
+      palabras.forEach(pal => {
+        let colocado = false;
+        let intentos = 0;
+        while(!colocado && intentos < 100){
+          intentos++;
+          let dir = Math.floor(Math.random()*2);
+          if(dir===0 && pal.length<=cols){
+            let fila = Math.floor(Math.random()*filas);
+            let col = Math.floor(Math.random()*(cols - pal.length +1));
+            if(matriz[fila].slice(col,col+pal.length).every(cell=>cell==='')){
+              for(let i=0;i<pal.length;i++) matriz[fila][col+i]=pal[i];
+              colocado = true;
+            }
+          } else if(dir===1 && pal.length<=filas){
+            let col = Math.floor(Math.random()*cols);
+            let fila = Math.floor(Math.random()*(filas - pal.length +1));
+            if(Array.from({length:pal.length},(_,i)=>matriz[fila+i][col]).every(cell=>cell==='')){
+              for(let i=0;i<pal.length;i++) matriz[fila+i][col]=pal[i];
+              colocado = true;
+            }
+          }
+        }
+      });
+
+      for(let r=0;r<filas;r++){
+        for(let c=0;c<cols;c++){
+          if(matriz[r][c]==='') matriz[r][c] = String.fromCharCode(65 + Math.floor(Math.random()*26));
+          const div = document.createElement('div');
+          div.className='letra';
+          div.innerText = matriz[r][c];
+
+          // Eventos de mouse
+          div.addEventListener('mousedown',()=>{
+            seleccionando=true;
+            marcar(div);
+          });
+          div.addEventListener('mouseenter',()=>{
+            if(seleccionando) marcar(div);
+          });
+          div.addEventListener('mouseup',()=>{
+            seleccionando=false;
+            checkPalabras();
+            seleccion=[];
+          });
+
+          // Eventos táctiles optimizados
+          div.addEventListener('touchstart',(e)=>{
+            e.preventDefault();
+            seleccionando = true;
+            marcar(div);
+          }, { passive: false });
+
+          div.addEventListener('touchmove',(e)=>{
+            e.preventDefault();
+            const touch = e.touches[0];
+            const elemento = document.elementFromPoint(touch.clientX, touch.clientY);
+            if(elemento && elemento.classList.contains('letra') && seleccionando){
+              marcar(elemento);
+            }
+          }, { passive: false });
+
+          div.addEventListener('touchend',(e)=>{
+            e.preventDefault();
+            seleccionando = false;
+            checkPalabras();
+            seleccion = [];
+          }, { passive: false });
+
+          gridEl.appendChild(div);
+        }
+      }
+    }
+
+    function marcar(div){
+      if(!div.classList.contains('marcada')){
+        div.classList.add('marcada');
+        seleccion.push(div);
+      }
+    }
+
+    function checkPalabras(){
+      let palabraFormada = seleccion.map(d=>d.innerText).join('');
+      if(palabras.includes(palabraFormada)){
+        let colorRandom = colores[Math.floor(Math.random()*colores.length)];
+        seleccion.forEach(d=>d.style.background=colorRandom);
+        sonidoPalabra.play().catch(()=>{});
+        let spans = palabrasEl.querySelectorAll('span');
+        spans.forEach(span=>{ if(span.innerText===palabraFormada){ span.classList.add('tachada'); span.style.color = colorRandom; } });
+        if(document.querySelectorAll('#palabras span.tachada').length === palabras.length){
+          clearInterval(timerInterval);
+          mensajeFinalEl.innerText = '¡Felicitaciones! Ha completado el desafío a tiempo. Por favor, diríjase al stand para reclamar su premio.';
+          mensajeFinalEl.style.display = 'block';
+        }
+      } else {
+        seleccion.forEach(d=>d.classList.remove('marcada'));
+      }
+    }
+  </script>
+</body>
+</html>
